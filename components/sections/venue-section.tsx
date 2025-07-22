@@ -3,11 +3,11 @@ import GoogleMapEmbed from "@/components/google-map-embed"
 
 export default function VenueSection() {
   return (
-    <section id="local" className="py-16 bg-white">
+    <section id="local" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-burgundy mb-4 font-serif">Local do Evento</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
+          <p className="text-gray-700 mx-auto">
             O evento será realizado em um espaço aconchegante e acessível, projetado para proporcionar conforto e
             facilitar a interação entre as participantes.
           </p>
@@ -18,7 +18,7 @@ export default function VenueSection() {
             <GoogleMapEmbed />
           </div>
           <div className="md:w-1/2">
-            <h3 className="text-2xl font-bold text-burgundy mb-6">Centro de Convenções Espaço Mulher</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-burgundy mb-6">Auditório do Empresarial 18 do Forte</h3>
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-4">
@@ -27,15 +27,17 @@ export default function VenueSection() {
                 <div>
                   <h4 className="font-bold mb-2">Endereço</h4>
                   <p className="text-gray-600">
-                    Av. das Flores, 1500
+                    Avenida Ipanema, 165
                     <br />
-                    Jardim Primavera, São Paulo - SP
+                    Empresarial 18 do Forte
                     <br />
-                    CEP: 04000-000
+                    Alphaville - Barueri - SP
+                    <br />
+                    CEP: 06472-002
                   </p>
                 </div>
               </div>
-
+{/*
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-4">
                   <svg
@@ -93,6 +95,7 @@ export default function VenueSection() {
                   </p>
                 </div>
               </div>
+              */}
             </div>
           </div>
         </div>

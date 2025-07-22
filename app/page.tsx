@@ -5,13 +5,15 @@ import AboutSection from "@/components/sections/about-section"
 import SpeakersSection from "@/components/sections/speakers-section"
 import ScheduleSection from "@/components/sections/schedule-section"
 import TestimonialsSection from "@/components/sections/testimonials-section"
+import PhotosSection from "@/components/sections/photos-section"
+import SupportersSection from "@/components/sections/supporters-section"
 import VenueSection from "@/components/sections/venue-section"
 import FAQSection from "@/components/sections/faq-section"
 import CTASection from "@/components/sections/cta-section"
 import FooterSection from "@/components/sections/footer-section"
 
 export default function Home() {
-  const eventDate = "2025-10-12" // Data do evento
+  const eventDate = "2025-08-23T15:00:00" // Data do evento
 
   return (
     <div className="min-h-screen">
@@ -30,11 +32,17 @@ export default function Home() {
       {/* Speakers Section */}
       <SpeakersSection />
 
-      {/* Schedule Section */}
-      <ScheduleSection />
+      {/* Schedule Section 
+      <ScheduleSection />*/}
 
       {/* Testimonials Section */}
       <TestimonialsSection />
+
+      {/* Photos Section 
+      <PhotosSection />*/}
+
+      {/* Supporters Section */}
+      <SupportersSection />
 
       {/* Venue Section */}
       <VenueSection />

@@ -26,9 +26,9 @@ export default function LocationMap({ address }: LocationMapProps) {
     const initMap = () => {
       if (!mapRef.current) return
 
-      // Coordenadas para Av. das Flores, 1500, Jardim Primavera, São Paulo - SP (fictício)
+      // Coordenadas para Av. Ipanema, 165 - Empresarial 18 do Forte
       // Normalmente você usaria geocoding para obter as coordenadas exatas
-      const location = { lat: -23.55052, lng: -46.633308 }
+      const location = { lat: -23.484084387389874, lng: -46.856658128243716 }
 
       const map = new window.google.maps.Map(mapRef.current, {
         center: location,

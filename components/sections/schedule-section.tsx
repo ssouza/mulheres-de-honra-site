@@ -2,11 +2,11 @@ import { Clock } from "lucide-react"
 
 export default function ScheduleSection() {
   return (
-    <section id="programacao" className="py-16 bg-white">
+    <section id="programacao" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-15">
           <h2 className="text-3xl md:text-4xl font-bold text-burgundy mb-4 font-serif">Programação</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
+          <p className="text-gray-700 mx-auto">
             Confira a programação completa do evento e planeje sua participação para aproveitar ao máximo cada momento.
           </p>
         </div>

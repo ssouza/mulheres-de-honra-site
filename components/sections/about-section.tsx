@@ -3,22 +3,24 @@ import { Users } from "lucide-react"
 
 export default function AboutSection() {
   return (
-    <section id="sobre" className="py-16 bg-white">
+    <section id="sobre" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-1/2">
-            <h2 className="text-3xl md:text-4xl font-bold text-burgundy mb-6 font-serif">
+          <div className="md:w-2/3">
+            <h2 className="text-2xl md:text-4xl font-bold text-burgundy mb-6 font-serif">
               O que é o Mulheres de Honra?
             </h2>
             <p className="text-gray-700 mb-4">
-              O Mulheres de Honra é um evento anual que reúne mulheres de diferentes áreas e trajetórias para
-              compartilhar experiências, conhecimentos e inspiração. Nosso objetivo é criar um espaço de conexão,
-              aprendizado e crescimento para todas as participantes.
+              <b>Existe uma identidade poderosa em Deus esperando para ser despertada em você — e o Mulheres de Honra é onde essa transformação acontece.</b>
             </p>
-            <p className="text-gray-700 mb-6">
-              Durante o evento, você terá a oportunidade de participar de palestras inspiradoras, workshops práticos e
-              momentos de networking com mulheres extraordinárias que estão fazendo a diferença em suas comunidades e
-              profissões.
+            <p className="text-gray-700 mb-4">
+Este não é apenas mais um evento feminino. É um encontro sobrenatural onde mulheres descobrem sua verdadeira identidade, ativam seu propósito divino e caminham em santidade autêntica.
+            </p>
+            <p className="text-gray-700 mb-4">
+Se você sente o chamado de Deus para mais profundidade, mais clareza e mais propósito, este encontro foi feito para você.
+            </p>
+            <p className="text-gray-700 mb-4">
+<b>Prepare-se para uma experiência que vai marcar seu espírito e redefinir sua jornada.</b>
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -28,9 +30,12 @@ export default function AboutSection() {
                     <Users className="w-8 h-8 text-burgundy" />
                   </div>
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-burgundy">COMUNIDADE</h3>
+                <h3 className="text-lg font-bold mb-2 text-burgundy">
+                  IDENTIDADE
+                  CURADA
+                </h3>
                 <p className="text-sm text-gray-600">
-                  Conecte-se com mulheres inspiradoras e construa relacionamentos significativos
+                  Descubra quem você verdadeiramente é aos olhos de Deus e rompa com mentiras que limitam seu potencial.
                 </p>
               </div>
               <div className="text-center">
@@ -52,9 +57,12 @@ export default function AboutSection() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-burgundy">CAPACITAÇÃO</h3>
+                <h3 className="text-lg font-bold mb-2 text-burgundy">
+                  PROPÓSITO
+                  ATIVADO
+                </h3>
                 <p className="text-sm text-gray-600">
-                  Desenvolva habilidades e conhecimentos para impulsionar sua vida pessoal e profissional
+                  Receba clareza, coragem e confirmação divina para caminhar no que você nasceu para realizar.
                 </p>
               </div>
               <div className="text-center">
@@ -76,16 +84,24 @@ export default function AboutSection() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-burgundy">TRANSFORMAÇÃO</h3>
+                <h3 className="text-lg font-bold mb-2 text-burgundy">
+                  SANTIDADE
+                  COM PROPÓSITO
+                </h3>
                 <p className="text-sm text-gray-600">
-                  Experimente momentos de renovação e inspiração para uma vida de propósito
+                  Aprenda a viver uma vida consagrada de forma real e apaixonada, movida pelo amor, não pela obrigação.
                 </p>
               </div>
             </div>
           </div>
-          <div className="md:w-1/2">
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-              <Image src="/images/about-image.jpg" alt="Mulheres de Honra - Momentos" fill className="object-cover" />
+          <div className="md:w-1/3">
+            <div className="relative h-[480px] rounded-lg overflow-hidden shadow-xl max-w-sm mx-auto">
+              <Image
+                src="/images/IMG_5290.jpg"
+                alt="Organizadoras do Mulheres de Honra"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
