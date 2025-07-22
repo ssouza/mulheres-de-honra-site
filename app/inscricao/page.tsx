@@ -281,10 +281,13 @@ export default function InscricaoPage() {
       {/* Formulário */}
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-2xl md:text-3xl font-serif font-bold text-burgundy mb-6 text-center">Inscrição para o Evento</h1>
+          <h1 className="text-2xl md:text-3xl font-serif font-bold text-burgundy mb-6 text-center">
+            Inscrição para o Evento
+          </h1>
 
           <p className="text-gray-600 mb-8 text-center">
-            Preencha o formulário abaixo para garantir sua participação no evento Mulheres de Honra, em 23 de Agosto de 2025.
+            Preencha o formulário abaixo para garantir sua participação no evento Mulheres de Honra, em 23 de Agosto de
+            2025.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
