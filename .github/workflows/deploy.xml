@@ -3,7 +3,7 @@ name: Deploy Mulheres de Honra Website to Production
 
 on:
   push:
-    branches: [ master ]  # Changed from main to master
+    branches: [ main ]  # Changed from main to master
   workflow_dispatch:  # Enable manual triggers
     inputs:
       environment:
