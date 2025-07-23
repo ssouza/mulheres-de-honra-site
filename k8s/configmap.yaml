@@ -5,7 +5,7 @@ metadata:
   namespace: app
 data:
   NODE_ENV: "production"
-  PORT: "3000"
+  PORT: "3010"
   HOSTNAME: "0.0.0.0"
   
   # Next.js specific

@@ -11,10 +11,10 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - mulheres-de-honra.mulherdehonra.com.br
+    - mulherdehonra.com.br
     secretName: mulheres-de-honra-tls
   rules:
-  - host: mulheres-de-honra.mulherdehonra.com.br
+  - host: mulherdehonra.com.br
     http:
       paths:
       - path: /
