@@ -12,7 +12,9 @@ const nextConfig = {
   // Enable standalone output for Docker
   output: 'standalone',
   // Disable telemetry in production
-  telemetry: false,
+  experimental: {
+    outputFileTracingRoot: undefined,
+  },
 }
 
 export default nextConfig
