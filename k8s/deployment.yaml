@@ -20,9 +20,12 @@ spec:
       labels:
         app: mulheres-de-honra
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: mulheres-de-honra
         image: IMAGE_PLACEHOLDER  # Will be replaced by GitHub Actions
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         envFrom:
