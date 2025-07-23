@@ -24,7 +24,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: mulheres-de-honra
-        images: ghcr.io/ssouza/mulheres-de-honra-site:latest
+        image: ghcr.io/ssouza/mulheres-de-honra-site:latest  # Corrigido: era "images"
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
@@ -37,22 +37,6 @@ spec:
           value: "3000"
         - name: HOSTNAME
           value: "0.0.0.0"
-        livenessProbe:
-          httpGet:
-            path: /api/health
-            port: 3000
-          initialDelaySeconds: 60
-          periodSeconds: 30
-          timeoutSeconds: 10
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /api/health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
         resources:
           requests:
             memory: "256Mi"

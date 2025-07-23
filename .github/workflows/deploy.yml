@@ -1,22 +1,12 @@
-# .github/workflows/deploy.yml
 name: Deploy Mulheres de Honra Website to Production
 
 on:
   push:
-    branches: [ main ]  # Changed from main to master
-  workflow_dispatch:  # Enable manual triggers
-    inputs:
-      environment:
-        description: 'Environment to deploy'
-        required: true
-        default: 'production'
-        type: choice
-        options:
-        - production
+    branches: [ main ]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ssouza/mulheres-de-honra-site
 
 jobs:
   build-and-deploy:
@@ -26,7 +16,7 @@ jobs:
       packages: write
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Log in to Container Registry
@@ -43,13 +33,14 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
           type=ref,event=branch
-          type=sha,prefix={{branch}}-
-          type=raw,value=latest
+          type=raw,value=latest,enable={{is_default_branch}}
+          type=raw,value=main-{{sha}},enable={{is_default_branch}}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
+        file: ./Dockerfile
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
@@ -57,11 +48,9 @@ jobs:
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
-        version: 'v1.28.0'
+        version: 'latest'
 
-    - name: Configure kubectl with Rancher
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+    - name: Configure kubectl
       run: |
         # Remove any existing kubectl config
         rm -rf ~/.kube
@@ -74,44 +63,31 @@ jobs:
         # Explicitly set KUBECONFIG for all subsequent steps
         echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
         
-        # Debug: Show config without sensitive data
-        echo "=== Kubectl Configuration Debug ==="
-        echo "KUBECONFIG path: $HOME/.kube/config"
-        echo "File exists: $(test -f ~/.kube/config && echo 'YES' || echo 'NO')"
-        echo "File permissions: $(ls -la ~/.kube/config)"
-        
-        # Test kubectl with explicit config
-        echo "=== Testing kubectl connection ==="
-        kubectl --kubeconfig=$HOME/.kube/config version --client
-        kubectl --kubeconfig=$HOME/.kube/config config view --minify | head -20
-        
-        echo "=== Testing cluster connection ==="
-        kubectl --kubeconfig=$HOME/.kube/config cluster-info --request-timeout=30s
-
-    - name: Verify Kubernetes connection
+        # Test connection
+        kubectl cluster-info --request-timeout=30s
       env:
-        KUBECONFIG: ${{ env.KUBECONFIG }}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+
+    - name: Create Docker Registry Secret
       run: |
-        echo "Using KUBECONFIG: $KUBECONFIG"
-        kubectl get nodes --request-timeout=30s
-        kubectl get namespaces | grep -E "(app|database|kube-system)"
+        kubectl create secret docker-registry ghcr-secret \
+          --docker-server=${{ env.REGISTRY }} \
+          --docker-username=${{ github.actor }} \
+          --docker-password=${{ secrets.GITHUB_TOKEN }} \
+          --docker-email=${{ github.actor }}@users.noreply.github.com \
+          --namespace=app \
+          --dry-run=client -o yaml | kubectl apply -f -
 
-    - name: Deploy to Production
-      env:
-        KUBECONFIG: ${{ env.KUBECONFIG }}
+    - name: Deploy to Kubernetes
       run: |
         echo "=== Starting deployment ==="
         
-        # Update image in deployment
-        sed -i "s|IMAGE_PLACEHOLDER|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" k8s/deployment.yaml
-        
-        # Show what we're about to deploy
-        echo "=== Deployment manifest ==="
-        cat k8s/deployment.yaml | grep -A5 -B5 image:
-        
-        # Apply all manifests
+        # Apply all manifests (deployment.yaml já tem a imagem correta)
         echo "=== Applying Kubernetes manifests ==="
         kubectl apply -f k8s/ --timeout=60s
+        
+        # Force restart deployment to pull new image
+        kubectl rollout restart deployment/mulheres-de-honra -n app
         
         # Wait for rollout to complete
         echo "=== Waiting for rollout ==="
@@ -122,22 +98,3 @@ jobs:
         kubectl get pods -n app -l app=mulheres-de-honra
         kubectl get svc -n app
         kubectl get ingress -n app
-
-    - name: Run Database Migrations
-      env:
-        KUBECONFIG: ${{ env.KUBECONFIG }}
-      run: |
-        echo "=== Running database migrations ==="
-        
-        # Wait for pod to be ready
-        kubectl wait --for=condition=ready pod -l app=mulheres-de-honra -n app --timeout=300s
-        
-        # Run Rails migrations
-        echo "Running Rails migrations..."
-        kubectl exec -n app deployment/mulheres-de-honra -- bundle exec rails db:migrate RAILS_ENV=production
-        
-        # Precompile assets if needed
-        echo "Precompiling assets..."
-        kubectl exec -n app deployment/mulheres-de-honra -- bundle exec rails assets:precompile RAILS_ENV=production || echo "Assets precompilation skipped or failed"
-        
-        echo "=== Deployment completed successfully ==="
