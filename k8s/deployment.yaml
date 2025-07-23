@@ -24,7 +24,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: mulheres-de-honra
-        images: ghcr.io/ssouza/mulheres-de-honra-site:latest
+        images: IMAGE_PLACEHOLDER
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
