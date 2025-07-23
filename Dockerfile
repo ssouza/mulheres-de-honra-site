@@ -1,5 +1,5 @@
 # Multi-stage build for Next.js production
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -8,6 +8,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json ./
+RUN npm i -g npm@11.4.2
 RUN npm i
 
 # Rebuild the source code only when needed

@@ -1,9 +1,10 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type React from "react"
+import type { Metadata } from "next"
+import "./globals.css"
 
 export const metadata: Metadata = {
-  title: 'Mulheres de Honra - Alphaville',
-  description: 'Created by sergio.lcs@gmail.com',
+  title: "Mulheres de Honra - Alphaville",
+  description: "Created by sergio.lcs@gmail.com",
     generator: 'v0.dev'
 }
 

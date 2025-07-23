@@ -1,5 +1,11 @@
 import Link from "next/link"
 import { ArrowLeft, Check } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Inscrição Confirmada - Mulheres de Honra - Alphaville",
+  description: "Sua inscrição foi confirmada com sucesso para o evento Mulheres de Honra em Alphaville",
+}
 
 export default function ObrigadoPage() {
   return (
