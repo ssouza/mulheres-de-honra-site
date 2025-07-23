@@ -1,0 +1,352 @@
+# .github/workflows/deploy.yml
+name: Deploy Mulheres de Honra Website to Production
+
+on:
+  push:
+    branches: [ main ]  # Changed from main to master
+  workflow_dispatch:  # Enable manual triggers
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.28.0'
+
+    - name: Configure kubectl with Rancher
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+      run: |
+        # Remove any existing kubectl config
+        rm -rf ~/.kube
+        mkdir -p ~/.kube
+        
+        # Decode and write kubeconfig
+        echo "$KUBE_CONFIG_DATA" | base64 -d > ~/.kube/config
+        chmod 600 ~/.kube/config
+        
+        # Explicitly set KUBECONFIG for all subsequent steps
+        echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
+        
+        # Debug: Show config without sensitive data
+        echo "=== Kubectl Configuration Debug ==="
+        echo "KUBECONFIG path: $HOME/.kube/config"
+        echo "File exists: $(test -f ~/.kube/config && echo 'YES' || echo 'NO')"
+        echo "File permissions: $(ls -la ~/.kube/config)"
+        
+        # Test kubectl with explicit config
+        echo "=== Testing kubectl connection ==="
+        kubectl --kubeconfig=$HOME/.kube/config version --client
+        kubectl --kubeconfig=$HOME/.kube/config config view --minify | head -20
+        
+        echo "=== Testing cluster connection ==="
+        kubectl --kubeconfig=$HOME/.kube/config cluster-info --request-timeout=30s
+
+    - name: Verify Kubernetes connection
+      env:
+        KUBECONFIG: ${{ env.KUBECONFIG }}
+      run: |
+        echo "Using KUBECONFIG: $KUBECONFIG"
+        kubectl get nodes --request-timeout=30s
+        kubectl get namespaces | grep -E "(app|database|kube-system)"
+
+    - name: Deploy to Production
+      env:
+        KUBECONFIG: ${{ env.KUBECONFIG }}
+      run: |
+        echo "=== Starting deployment ==="
+        
+        # Update image in deployment
+        sed -i "s|IMAGE_PLACEHOLDER|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" k8s/deployment.yaml
+        
+        # Show what we're about to deploy
+        echo "=== Deployment manifest ==="
+        cat k8s/deployment.yaml | grep -A5 -B5 image:
+        
+        # Apply all manifests
+        echo "=== Applying Kubernetes manifests ==="
+        kubectl apply -f k8s/ --timeout=60s
+        
+        # Wait for rollout to complete
+        echo "=== Waiting for rollout ==="
+        kubectl rollout status deployment/mulheres-de-honra -n app --timeout=600s
+        
+        # Show deployment status
+        echo "=== Deployment status ==="
+        kubectl get pods -n app -l app=mulheres-de-honra
+        kubectl get svc -n app
+        kubectl get ingress -n app
+
+    - name: Run Database Migrations
+      env:
+        KUBECONFIG: ${{ env.KUBECONFIG }}
+      run: |
+        echo "=== Running database migrations ==="
+        
+        # Wait for pod to be ready
+        kubectl wait --for=condition=ready pod -l app=mulheres-de-honra -n app --timeout=300s
+        
+        # Run Rails migrations
+        echo "Running Rails migrations..."
+        kubectl exec -n app deployment/mulheres-de-honra -- bundle exec rails db:migrate RAILS_ENV=production
+        
+        # Precompile assets if needed
+        echo "Precompiling assets..."
+        kubectl exec -n app deployment/mulheres-de-honra -- bundle exec rails assets:precompile RAILS_ENV=production || echo "Assets precompilation skipped or failed"
+        
+        echo "=== Deployment completed successfully ==="
+
+---
+# k8s/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mulheres-de-honra-secrets
+  namespace: app
+type: Opaque
+data:
+  # Rails secrets (generate with: rails secret | base64)
+  SECRET_KEY_BASE: ""  # Add your Rails secret here
+  
+  # Database credentials
+  DATABASE_PASSWORD: bXlzcWwxMjM=  # mysql123
+  
+  # External service keys
+  REDIS_PASSWORD: cmVkaXMxMjM=  # redis123 (if using Redis)
+
+---
+# k8s/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mulheres-de-honra-config
+  namespace: app
+data:
+  RAILS_ENV: "production"
+  RACK_ENV: "production"
+  PORT: "3000"
+  
+  # Database configuration
+  DATABASE_ADAPTER: "mysql2"
+  DATABASE_HOST: "mysql.database.svc.cluster.local"
+  DATABASE_PORT: "3306"
+  DATABASE_NAME: "mulheres-de-honra_production"
+  DATABASE_USERNAME: "mysql"
+  
+  # Redis configuration (if needed)
+  REDIS_URL: "redis://default:redis123@redis.database.svc.cluster.local:6379/0"
+  
+  # Rails specific
+  RAILS_SERVE_STATIC_FILES: "true"
+  RAILS_LOG_TO_STDOUT: "true"
+  FORCE_SSL: "false"
+  
+  # Application settings
+  RAILS_MAX_THREADS: "5"
+  WEB_CONCURRENCY: "2"
+
+---
+# k8s/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mulheres-de-honra
+  namespace: app
+  labels:
+    app: mulheres-de-honra
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: mulheres-de-honra
+  template:
+    metadata:
+      labels:
+        app: mulheres-de-honra
+    spec:
+      containers:
+      - name: mulheres-de-honra
+        image: IMAGE_PLACEHOLDER  # Will be replaced by GitHub Actions
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: mulheres-de-honra-config
+        - secretRef:
+            name: mulheres-de-honra-secrets
+        command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        volumeMounts:
+        - name: app-storage
+          mountPath: /app/storage
+        - name: app-tmp
+          mountPath: /app/tmp
+      volumes:
+      - name: app-storage
+        emptyDir: {}
+      - name: app-tmp
+        emptyDir: {}
+
+---
+# k8s/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mulheres-de-honra-service
+  namespace: app
+  labels:
+    app: mulheres-de-honra
+spec:
+  selector:
+    app: mulheres-de-honra
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+    protocol: TCP
+  type: ClusterIP
+
+---
+# k8s/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mulheres-de-honra-hpa
+  namespace: app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mulheres-de-honra
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+---
+# k8s/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mulheres-de-honra-ingress
+  namespace: app
+  annotations:
+    traefik.ingress.kubernetes.io/backend-protocol: "http"
+    traefik.ingress.kubernetes.io/router.middlewares: "app-mulheres-de-honra-headers@kubernetescrd"
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - mulheres-de-honra.mulherdehonra.com.br
+    secretName: mulheres-de-honra-tls
+  rules:
+  - host: mulheres-de-honra.mulherdehonra.com.br
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mulheres-de-honra-service
+            port:
+              number: 80
+
+---
+# k8s/middleware.yaml
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: mulheres-de-honra-headers
+  namespace: app
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+      X-Forwarded-Port: "443"
+    customResponseHeaders:
+      X-Frame-Options: "SAMEORIGIN"
+      X-Content-Type-Options: "nosniff"
