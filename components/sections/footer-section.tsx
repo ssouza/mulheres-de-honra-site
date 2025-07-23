@@ -6,7 +6,7 @@ export default function FooterSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0">
           <div>
-            <h4 className="text-burgundy font-bold mb-4">Links Rápidos</h4>
+            <h4 className="text-burgundy font-bold mb-2 md:mb-4">Links Rápidos</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="#sobre" className="text-gray-600 hover:text-burgundy">
@@ -41,7 +41,7 @@ export default function FooterSection() {
             </ul>
           </div>
           <div>
-            <h4 className="text-burgundy font-bold mb-4">Contato</h4>
+            <h4 className="text-burgundy font-bold mb-2 md:mb-4">Contato</h4>
             <ul className="space-y-2">
               <li className="text-gray-600">contato@mulheresdehonra.com.br</li>
               <li className="text-gray-600">(11) 99999-9999</li>
