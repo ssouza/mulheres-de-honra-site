@@ -6,11 +6,11 @@ metadata:
   labels:
     app: mulheres-de-honra
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 0
+      maxUnavailable: 1
       maxSurge: 1
   selector:
     matchLabels:
@@ -24,25 +24,28 @@ spec:
       - name: ghcr-pull-secret
       containers:
       - name: mulheres-de-honra
-        image: IMAGE_PLACEHOLDER
+        image: IMAGE_PLACEHOLDER  # Will be replaced by GitHub Actions
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
         - name: NODE_ENV
           value: "production"
-        - name: PORT
-          value: "3000"
         - name: NEXT_TELEMETRY_DISABLED
           value: "1"
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "100m"
-          limits:
-            memory: "512Mi"
-            cpu: "300m"
+        - name: PORT
+          value: "3000"
+        - name: HOSTNAME
+          value: "0.0.0.0"
         livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
           httpGet:
             path: /api/health
             port: 3000
@@ -50,11 +53,16 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 5
           failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /api/health
-            port: 3000
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          timeoutSeconds: 3
-          failureThreshold: 3
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: app-tmp
+          mountPath: /tmp
+      volumes:
+      - name: app-tmp
+        emptyDir: {}
