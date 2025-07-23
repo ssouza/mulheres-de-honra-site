@@ -4,15 +4,12 @@ metadata:
   name: mulheres-de-honra-ingress
   namespace: app
   annotations:
-    traefik.ingress.kubernetes.io/backend-protocol: "http"
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik
-  tls:
-  - hosts:
-    - mulherdehonra.com.br
-    secretName: mulherdehonra-tls
   rules:
-  - host: mulherdehonra.com.br
+  - host: mulheres-de-honra.mulherdehonra.com.br
     http:
       paths:
       - path: /
@@ -22,3 +19,7 @@ spec:
             name: mulheres-de-honra-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - mulheres-de-honra.mulherdehonra.com.br
+    secretName: mulheres-de-honra-tls

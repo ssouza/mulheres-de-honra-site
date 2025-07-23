@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  reactStrictMode: true,
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -7,14 +10,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: ['blob.v0.dev', 'hebbkx1anhila5yf.public.blob.vercel-storage.com'],
     unoptimized: true,
   },
-  // Enable standalone output for Docker
-  output: 'standalone',
-  // Disable telemetry in production
-  experimental: {
-    outputFileTracingRoot: undefined,
-  },
-}
+};
 
-export default nextConfig
+export default nextConfig;
