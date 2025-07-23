@@ -59,7 +59,7 @@ export default function SpeakersSection() {
 
           <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
             <div className="relative aspect-square">
-              <Image src="/images/speaker-3-new.jpg" alt="Flávia Lescowicz" fill className="object-cover" />
+              <Image src="/images/speaker-3.jpg" alt="Flávia Lescowicz" fill className="object-cover" />
             </div>
             <div className="px-6 py-3">
               <h3 className="text-xl font-bold text-burgundy mb-2">Flávia Lescowicz</h3>
