@@ -24,7 +24,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: mulheres-de-honra
-        image: IMAGE_PLACEHOLDER  # Will be replaced by GitHub Actions
+        image: ghcr.io/ssouza/mulheres-de-honra-site:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
