@@ -6,7 +6,7 @@ export default function AboutSection() {
     <section id="sobre" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          <div className="lg:w-2/3 order-1 lg:order-1">
+          <div className="lg:w-2/3 order-1">
             <h2 className="text-2xl md:text-4xl font-bold text-burgundy mb-6 font-serif">
               O que é o Mulheres de Honra?
             </h2>
