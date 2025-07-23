@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - mulheres-de-honra.mulherdehonra.com.br
-    secretName: mulherdehonra-tls
+    secretName: mulheresdehonra-tls
   rules:
   - host: mulheres-de-honra.mulherdehonra.com.br
     http:
