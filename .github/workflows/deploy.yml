@@ -51,6 +51,8 @@ jobs:
         version: 'latest'
 
     - name: Configure kubectl
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
       run: |
         # Remove any existing kubectl config
         rm -rf ~/.kube
@@ -65,18 +67,6 @@ jobs:
         
         # Test connection
         kubectl cluster-info --request-timeout=30s
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-
-    - name: Create Docker Registry Secret
-      run: |
-        kubectl create secret docker-registry ghcr-secret \
-          --docker-server=${{ env.REGISTRY }} \
-          --docker-username=${{ github.actor }} \
-          --docker-password=${{ secrets.GITHUB_TOKEN }} \
-          --docker-email=${{ github.actor }}@users.noreply.github.com \
-          --namespace=app \
-          --dry-run=client -o yaml | kubectl apply -f -
 
     - name: Deploy to Kubernetes
       run: |
