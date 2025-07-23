@@ -7,13 +7,15 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm@latest-10
-RUN pnpm i
+COPY package.json package-lock.json* ./
+RUN \
+  if [ -f package-lock.json ]; then npm ci --only=production; \
+  else echo "Lockfile not found." && npm install --only=production; \
+  fi
 
 # Rebuild the source code only when needed
 FROM base AS builder
-# WORKDIR /app
+WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -22,7 +24,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN pnpm run build
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
