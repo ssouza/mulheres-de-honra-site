@@ -5,14 +5,12 @@ metadata:
   namespace: app
   annotations:
     traefik.ingress.kubernetes.io/backend-protocol: "http"
-    traefik.ingress.kubernetes.io/router.middlewares: "app-mulheres-de-honra-headers@kubernetescrd"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: traefik
   tls:
   - hosts:
     - mulherdehonra.com.br
-    secretName: mulheres-de-honra-tls
+    secretName: mulherdehonra-tls
   rules:
   - host: mulherdehonra.com.br
     http:
