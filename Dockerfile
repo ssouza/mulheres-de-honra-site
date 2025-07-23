@@ -7,13 +7,13 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json ./
+COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm@latest-10
 RUN pnpm i
 
 # Rebuild the source code only when needed
 FROM base AS builder
-WORKDIR /app
+# WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -22,7 +22,6 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-WORKDIR /app
 RUN pnpm run build
 
 # Production image, copy all the files and run next
