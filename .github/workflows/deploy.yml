@@ -55,6 +55,8 @@ jobs:
         version: 'latest'
 
     - name: Configure kubectl
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
       run: |
         # Remove any existing kubectl config
         rm -rf ~/.kube
@@ -69,8 +71,6 @@ jobs:
         
         # Test connection
         kubectl cluster-info --request-timeout=30s
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
 
     - name: Deploy to Kubernetes
       run: |
