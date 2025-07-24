@@ -205,7 +205,7 @@ export default function InscricaoClientPage() {
         cpf: formData.cpf.replace(/\D/g, ""), // Remove formatação
       }
 
-      const response = await fetch("http://192.168.0.109:3000/api/v1/inscricoes", {
+      const response = await fetch("http://eventmanager.ssouza.com.br/api/v1/inscricoes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
