@@ -43,6 +43,26 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Debug environment variables
+      run: |
+        echo "🔍 Checking if secrets are available in workflow..."
+        if [ -z "$NEXT_PUBLIC_BACKEND_API_KEY" ]; then
+          echo "❌ NEXT_PUBLIC_BACKEND_API_KEY is empty or not set"
+        else
+          echo "✅ NEXT_PUBLIC_BACKEND_API_KEY is present (length: ${#NEXT_PUBLIC_BACKEND_API_KEY})"
+          echo "First 10 chars: ${NEXT_PUBLIC_BACKEND_API_KEY:0:10}..."
+        fi
+        
+        if [ -z "$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY" ]; then
+          echo "❌ NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY is empty or not set"
+        else
+          echo "✅ NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY is present (length: ${#NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY})"
+          echo "First 10 chars: ${NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY:0:10}..."
+        fi
+      env:
+        NEXT_PUBLIC_BACKEND_API_KEY: ${{ secrets.NEXT_PUBLIC_BACKEND_API_KEY }}
+        NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY }}
+
     - name: Build and push Docker image
       id: build
       uses: docker/build-push-action@v5
