@@ -27,7 +27,7 @@ spec:
         image: ghcr.io/ssouza/mulheres-de-honra-site:latest  # Corrigido: era "images"
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 3101
         envFrom:
         - secretRef:
             name: mulheres-de-honra-secrets
@@ -37,13 +37,13 @@ spec:
         - name: NEXT_TELEMETRY_DISABLED
           value: "1"
         - name: PORT
-          value: "3000"
+          value: "3101"
         - name: HOSTNAME
           value: "0.0.0.0"
         livenessProbe:
           httpGet:
             path: /api/health
-            port: 3000
+            port: 3101
           initialDelaySeconds: 60
           periodSeconds: 30
           timeoutSeconds: 10
@@ -51,7 +51,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /api/health
-            port: 3000
+            port: 3101
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5

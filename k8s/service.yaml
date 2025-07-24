@@ -10,7 +10,7 @@ spec:
     app: mulheres-de-honra
   ports:
   - name: http
-    port: 3000
-    targetPort: 3000
+    port: 3101
+    targetPort: 3101
     protocol: TCP
   type: ClusterIP
