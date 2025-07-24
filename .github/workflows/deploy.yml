@@ -53,6 +53,10 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        build-args: |
+          NEXT_PUBLIC_BACKEND_API_KEY=${{ secrets.NEXT_PUBLIC_BACKEND_API_KEY }}
+          NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY }}
+
 
     - name: Build Summary
       run: |
