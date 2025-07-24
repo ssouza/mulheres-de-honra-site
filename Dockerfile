@@ -23,8 +23,23 @@ RUN npm install -g pnpm@latest
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Build arguments for Next.js public environment variables
+ARG NEXT_PUBLIC_BACKEND_API_KEY
+ARG NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY
+
+# Create .env.local file with the build args
+RUN echo "NEXT_PUBLIC_BACKEND_API_KEY=${NEXT_PUBLIC_BACKEND_API_KEY}" > .env.local && \
+    echo "NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=${NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY}" >> .env.local
+
+# Debug: Show .env.local content (without exposing values)
+RUN echo "Generated .env.local:" && \
+    cat .env.local | sed 's/=.*/=***HIDDEN***/' 
+
+# Set environment variables for build (backup method)
+ENV NEXT_PUBLIC_BACKEND_API_KEY=$NEXT_PUBLIC_BACKEND_API_KEY
+ENV NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY
+
 # Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN pnpm run build
