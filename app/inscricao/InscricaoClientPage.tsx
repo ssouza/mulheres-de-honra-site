@@ -105,7 +105,6 @@ export default function InscricaoClientPage() {
 
       // Adiciona código do país (55) se não tiver
       const numberWithCountryCode = whatsappNumber.startsWith("55") ? whatsappNumber : `55${whatsappNumber}`
-      alert(JSON.stringify(process.env))
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_EVOLUTION_API_INSTANCE_URL}/chat/whatsappNumbers/${process.env.NEXT_PUBLIC_EVOLUTION_API_INSTANCE_NAME}`,
         {
