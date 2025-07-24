@@ -28,9 +28,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3101
-        # envFrom:
-        # - secretRef:
-        #     name: mulheres-de-honra-secrets
+        envFrom:
+        - configMapRef:
+            name: mulheres-de-honra-config
         env:
         - name: NODE_ENV
           value: "production"
