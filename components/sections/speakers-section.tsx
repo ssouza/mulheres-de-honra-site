@@ -21,6 +21,7 @@ export default function SpeakersSection() {
             </div>
             <div className="px-6 py-3">
               <h3 className="text-xl font-bold text-burgundy mb-2">Lady Daiane</h3>
+              <p className="text-burgundy-dark mb-4">Advogada</p>
               <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/ladydaianeadv"
@@ -42,6 +43,7 @@ export default function SpeakersSection() {
             </div>
             <div className="px-6 py-3">
               <h3 className="text-xl font-bold text-burgundy mb-2">Marcia Saccomani</h3>
+              <p className="text-burgundy-dark mb-4">Empresária</p>
               <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/marciafsaccomani"
@@ -63,6 +65,11 @@ export default function SpeakersSection() {
             </div>
             <div className="px-6 py-3">
               <h3 className="text-xl font-bold text-burgundy mb-2">Flávia Lescowicz</h3>
+              <p className="text-burgundy-dark mb-4">Psicóloga e Empresária</p>
+              {/* <p className="text-gray-600 mb-4">
+                Fundadora de três empresas de sucesso, Carla compartilha sua jornada empreendedora e estratégias para
+                mulheres que desejam iniciar ou expandir seus negócios.
+              </p> */}
               <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/flaviabueres"
@@ -84,6 +91,7 @@ export default function SpeakersSection() {
             </div>
             <div className="px-6 py-3">
               <h3 className="text-xl font-bold text-burgundy mb-2">Sheila Souza</h3>
+              <p className="text-burgundy-dark mb-4">Fisioterapeuta</p>
               <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/dra.sheilasouza"

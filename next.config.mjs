@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -8,15 +7,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['blob.v0.dev', 'hebbkx1anhila5yf.public.blob.vercel-storage.com'],
     unoptimized: true,
   },
+  // Enable standalone output for Docker
+  output: 'standalone',
+  // Disable telemetry in production
   experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
-  env: {
-    NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY,
-    NEXT_PUBLIC_BACKEND_API_KEY: process.env.NEXT_PUBLIC_BACKEND_API_KEY,
+    outputFileTracingRoot: undefined,
   },
 }
 

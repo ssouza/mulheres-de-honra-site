@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mulheres-de-honra
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -20,36 +20,30 @@ spec:
       labels:
         app: mulheres-de-honra
     spec:
-      imagePullSecrets:
-      - name: ghcr-secret
       containers:
       - name: mulheres-de-honra
-        image: ghcr.io/ssouza/mulheres-de-honra-site:latest  # Corrigido: era "images"
-        imagePullPolicy: Always
+        image: IMAGE_PLACEHOLDER  # Will be replaced by GitHub Actions
         ports:
-        - containerPort: 3000
-        env:
-        - name: NODE_ENV
-          value: "production"
-        - name: NEXT_TELEMETRY_DISABLED
-          value: "1"
-        - name: PORT
-          value: "3000"
-        - name: HOSTNAME
-          value: "0.0.0.0"
+        - containerPort: 3010
+        envFrom:
+        - configMapRef:
+            name: mulheres-de-honra-config
+        - secretRef:
+            name: mulheres-de-honra-secrets
+            optional: true
         livenessProbe:
           httpGet:
             path: /api/health
-            port: 3000
-          initialDelaySeconds: 60
+            port: 3010
+          initialDelaySeconds: 30
           periodSeconds: 30
           timeoutSeconds: 10
           failureThreshold: 3
         readinessProbe:
           httpGet:
             path: /api/health
-            port: 3000
-          initialDelaySeconds: 30
+            port: 3010
+          initialDelaySeconds: 15
           periodSeconds: 10
           timeoutSeconds: 5
           failureThreshold: 3
