@@ -27,17 +27,26 @@ COPY . .
 ARG NEXT_PUBLIC_BACKEND_API_KEY
 ARG NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY
 
-# Create .env.local file with the build args
-RUN echo "NEXT_PUBLIC_BACKEND_API_KEY=${NEXT_PUBLIC_BACKEND_API_KEY}" > .env.local && \
-    echo "NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=${NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY}" >> .env.local
+# Debug: Check if build args are received
+RUN echo "🔍 Build args received:" && \
+    echo "BACKEND_API_KEY: ${NEXT_PUBLIC_BACKEND_API_KEY:+PRESENT}" && \
+    echo "EVOLUTION_API_KEY: ${NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY:+PRESENT}" && \
+    if [ -z "$NEXT_PUBLIC_BACKEND_API_KEY" ]; then echo "❌ BACKEND_API_KEY is empty"; fi && \
+    if [ -z "$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY" ]; then echo "❌ EVOLUTION_API_KEY is empty"; fi
 
-# Debug: Show .env.local content (without exposing values)
-RUN echo "Generated .env.local:" && \
-    cat .env.local | sed 's/=.*/=***HIDDEN***/' 
-
-# Set environment variables for build (backup method)
+# CRITICAL: Set environment variables BEFORE running build
 ENV NEXT_PUBLIC_BACKEND_API_KEY=$NEXT_PUBLIC_BACKEND_API_KEY
 ENV NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY
+
+# Create .env.local as backup (Next.js reads this during build)
+RUN echo "NEXT_PUBLIC_BACKEND_API_KEY=$NEXT_PUBLIC_BACKEND_API_KEY" > .env.local && \
+    echo "NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY" >> .env.local
+
+# Debug: Show environment before build
+RUN echo "🌍 Environment before build:" && \
+    env | grep NEXT_PUBLIC && \
+    echo "📝 .env.local content:" && \
+    cat .env.local
 
 # Next.js collects completely anonymous telemetry data about general usage.
 ENV NEXT_TELEMETRY_DISABLED=1

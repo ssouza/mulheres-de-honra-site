@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import InscricaoClientPage from "./InscricaoClientPage"
+import EnvDebug from "@/components/env-debug"
 
 export const metadata: Metadata = {
   title: "Inscrição - Mulheres de Honra - Alphaville",
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 }
 
 export default function InscricaoPage() {
-  return <InscricaoClientPage />
+  return (
+    <div>
+      <EnvDebug />
+      <InscricaoClientPage />
+      </div>
+  )
 }
