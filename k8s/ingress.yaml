@@ -5,7 +5,6 @@ metadata:
   namespace: app
   annotations:
     traefik.ingress.kubernetes.io/backend-protocol: "http"
-    traefik.ingress.kubernetes.io/router.middlewares: "app-mulheres-de-honra-headers@kubernetescrd"
 spec:
   ingressClassName: traefik
   tls:
@@ -23,7 +22,7 @@ spec:
           service:
             name: mulheres-de-honra-service
             port:
-              number: 80
+              number: 3000
   - host: www.mulheresdehonra.com.br
     http:
       paths:
@@ -33,4 +32,4 @@ spec:
           service:
             name: mulheres-de-honra-service
             port:
-              number: 80
+              number: 3000
