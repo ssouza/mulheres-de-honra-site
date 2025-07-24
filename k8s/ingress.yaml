@@ -10,10 +10,21 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - mulheres-de-honra.mulherdehonra.com.br
+    - mulheresdehonra.com.br
+    - www.mulheresdehonra.com.br
     secretName: mulheresdehonra-tls
   rules:
-  - host: mulheres-de-honra.mulherdehonra.com.br
+  - host: mulheresdehonra.com.br
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mulheres-de-honra-service
+            port:
+              number: 80
+  - host: www.mulheresdehonra.com.br
     http:
       paths:
       - path: /
