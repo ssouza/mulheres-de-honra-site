@@ -28,11 +28,11 @@ ARG NEXT_PUBLIC_BACKEND_API_KEY
 ARG NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY
 
 # Debug: Check if build args are received
-RUN echo "🔍 Build args received:" && \
-    echo "BACKEND_API_KEY: ${NEXT_PUBLIC_BACKEND_API_KEY:+PRESENT}" && \
-    echo "EVOLUTION_API_KEY: ${NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY:+PRESENT}" && \
-    if [ -z "$NEXT_PUBLIC_BACKEND_API_KEY" ]; then echo "❌ BACKEND_API_KEY is empty"; fi && \
-    if [ -z "$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY" ]; then echo "❌ EVOLUTION_API_KEY is empty"; fi
+# RUN echo "🔍 Build args received:" && \
+#     echo "BACKEND_API_KEY: ${NEXT_PUBLIC_BACKEND_API_KEY:+PRESENT}" && \
+#     echo "EVOLUTION_API_KEY: ${NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY:+PRESENT}" && \
+#     if [ -z "$NEXT_PUBLIC_BACKEND_API_KEY" ]; then echo "❌ BACKEND_API_KEY is empty"; fi && \
+#     if [ -z "$NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY" ]; then echo "❌ EVOLUTION_API_KEY is empty"; fi
 
 # CRITICAL: Set environment variables BEFORE running build
 ENV NEXT_PUBLIC_BACKEND_API_KEY=$NEXT_PUBLIC_BACKEND_API_KEY
