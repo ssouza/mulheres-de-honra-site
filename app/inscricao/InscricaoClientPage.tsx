@@ -106,7 +106,7 @@ export default function InscricaoClientPage() {
       // Adiciona código do país (55) se não tiver
       const numberWithCountryCode = whatsappNumber.startsWith("55") ? whatsappNumber : `55${whatsappNumber}`
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_EVOLUTION_API_INSTANCE_URL}/chat/whatsappNumbers/${process.env.NEXT_PUBLIC_EVOLUTION_API_INSTANCE_NAME}`,
+        `https://evolutionapi.mulherdehonra.com.br/chat/whatsappNumbers/MulheresDeHonraAlphaville`,
         {
           method: "POST",
           headers: {
@@ -204,7 +204,7 @@ export default function InscricaoClientPage() {
         cpf: formData.cpf.replace(/\D/g, ""), // Remove formatação
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/inscricoes`, {
+      const response = await fetch(`http://eventmanager.ssouza.com.br/api/v1/inscricoes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

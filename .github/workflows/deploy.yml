@@ -63,7 +63,6 @@ jobs:
         echo "📦 Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
         echo "🏷️ Tags: ${{ steps.meta.outputs.tags }}"
         echo "🏗️ Platform: linux/arm64"
-        echo "ENV: ${{ env }}"
 
   deploy:
     name: Deploy to Kubernetes
