@@ -199,9 +199,11 @@ export default function InscricaoClientPage() {
     try {
       // Preparar dados para envio (remover formatação)
       const dataToSend = {
-        nomeCompleto: formData.nomeCompleto.trim(),
-        whatsapp: formData.whatsapp.replace(/\D/g, ""), // Remove formatação
+        nome: formData.nomeCompleto.trim(),
+        telefone: formData.whatsapp.replace(/\D/g, ""), // Remove formatação
         cpf: formData.cpf.replace(/\D/g, ""), // Remove formatação
+        eventoId: 1, // ID do evento
+        situacao: "registrado"
       }
 
       const response = await fetch(`http://eventmanager.ssouza.com.br/api/v1/inscricoes`, {
