@@ -56,13 +56,14 @@ jobs:
         build-args: |
           NEXT_PUBLIC_BACKEND_API_KEY=${{ secrets.NEXT_PUBLIC_BACKEND_API_KEY }}
           NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_EVOLUTION_API_PUBLIC_API_KEY }}
-
+      
     - name: Build Summary
       run: |
         echo "✅ Build completed successfully!"
         echo "📦 Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
         echo "🏷️ Tags: ${{ steps.meta.outputs.tags }}"
         echo "🏗️ Platform: linux/arm64"
+        echo "ENV: ${{ env }}"
 
   deploy:
     name: Deploy to Kubernetes
