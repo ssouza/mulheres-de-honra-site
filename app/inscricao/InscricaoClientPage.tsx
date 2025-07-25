@@ -106,7 +106,7 @@ export default function InscricaoClientPage() {
       // Adiciona código do país (55) se não tiver
       const numberWithCountryCode = whatsappNumber.startsWith("55") ? whatsappNumber : `55${whatsappNumber}`
       const response = await fetch(
-        `https://evolutionapi.mulherdehonra.com.br/chat/whatsappNumbers/MulheresDeHonraAlphaville`,
+        `https://evolutionapi.ssouza.com.br/chat/whatsappNumbers/MulheresDeHonraAlphaville`,
         {
           method: "POST",
           headers: {
