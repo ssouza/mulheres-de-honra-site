@@ -206,7 +206,7 @@ export default function InscricaoClientPage() {
         situacao: "registrado"
       }
 
-      const response = await fetch(`http://eventmanager.ssouza.com.br/api/v1/inscricoes`, {
+      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/inscricoes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
