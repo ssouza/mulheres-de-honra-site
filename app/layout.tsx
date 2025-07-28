@@ -4,8 +4,8 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Mulheres de Honra - Alphaville",
-  description: "Created by sergio.lcs@gmail.com",
-    generator: 'v0.dev'
+  description: "Criado por Sérgio Souza (sergio.lcs@gmail.com)",
+  manifest: "/manifest.json"
 }
 
 export default function RootLayout({
