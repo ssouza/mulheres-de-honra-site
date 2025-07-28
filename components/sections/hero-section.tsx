@@ -8,7 +8,7 @@ export default function HeroSection() {
     <section className="relative h-[600px] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-burgundy/80 to-burgundy-dark/80 z-10"></div>
       <Image
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5443.JPG-LJubkZBvq6x4GClqAgQ9BRwAJMWiV8.jpeg"
+        src="/hero-section.jpeg"
         alt="Mulheres de Honra - Evento"
         fill
         className="object-cover"
