@@ -4,7 +4,6 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Mulheres de Honra - Alphaville",
-  description: "Criado por Sérgio Souza (sergio.lcs@gmail.com)",
   manifest: "/manifest.json"
 }
 
