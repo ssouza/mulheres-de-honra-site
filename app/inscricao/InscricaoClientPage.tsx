@@ -218,12 +218,13 @@ export default function InscricaoClientPage() {
         utm_campaign: trackingData.utm_campaign || null,
         utm_term: trackingData.utm_term || null,
         utm_content: trackingData.utm_content || null,
-        utm_id: trackingData.utm_id || null,
-        referrer: trackingData.referrer || null,
-        landing_page: trackingData.landing_page || null,
         user_agent: trackingData.user_agent || null,
-        session_id: trackingData.session_id || null,
         timestamp_acesso: trackingData.timestamp || new Date().toISOString(),
+      }
+
+      let utms = ""
+      if (dataToSend.utm_source) {
+        utms = `?utm_source=${dataToSend.utm_source}&utm_medium=${dataToSend.utm_medium}&utm_campaign=${dataToSend.utm_campaign}&utm_term=${dataToSend.utm_term}&utm_content=${dataToSend.utm_content}`
       }
 
       // Log para debug (remover em produção)
@@ -231,7 +232,7 @@ export default function InscricaoClientPage() {
         console.log("Dados enviados para o backend:", dataToSend)
       }
 
-      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/inscricoes`, {
+      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/inscricoes${utms}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
