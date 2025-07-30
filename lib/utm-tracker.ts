@@ -129,53 +129,6 @@ export class UTMTracker {
   }
 
   /**
-   * Identifica a origem baseada nos parâmetros UTM
-   */
-  static identifySource(trackingData: TrackingData): string {
-    const { utm_source, utm_medium, referrer } = trackingData
-
-    // Facebook Ads
-    if (utm_source === "facebook" && utm_medium === "cpc") {
-      return "Facebook Ads"
-    }
-
-    // Instagram Bio
-    if (utm_source === "instagram" && utm_medium === "bio") {
-      return "Instagram Bio"
-    }
-
-    // Instagram Stories
-    if (utm_source === "instagram" && utm_medium === "stories") {
-      return "Instagram Stories"
-    }
-
-    // WhatsApp
-    if (utm_source === "whatsapp" && utm_medium === "message") {
-      return "WhatsApp Direto"
-    }
-
-    // WhatsApp Grupos
-    if (utm_source === "whatsapp" && utm_medium === "group") {
-      return "WhatsApp Grupos"
-    }
-
-    // Baseado no referrer
-    if (referrer) {
-      if (referrer.includes("facebook.com")) return "Facebook Orgânico"
-      if (referrer.includes("instagram.com")) return "Instagram Orgânico"
-      if (referrer.includes("google.com")) return "Google Orgânico"
-      if (referrer.includes("whatsapp.com")) return "WhatsApp"
-    }
-
-    // Acesso direto
-    if (referrer === "direct" || !referrer) {
-      return "Acesso Direto"
-    }
-
-    return "Outros"
-  }
-
-  /**
    * Limpa os dados de rastreamento
    */
   static clearTrackingData(): void {

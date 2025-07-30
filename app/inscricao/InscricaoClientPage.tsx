@@ -8,7 +8,7 @@ import { useUTMTracking } from "@/hooks/use-utm-tracking"
 
 export default function InscricaoClientPage() {
   const router = useRouter()
-  const { getTrackingDataForSubmission, getIdentifiedSource } = useUTMTracking()
+  const { getTrackingDataForSubmission } = useUTMTracking()
 
   const [formData, setFormData] = useState({
     nomeCompleto: "",
@@ -202,7 +202,6 @@ export default function InscricaoClientPage() {
     try {
       // Captura dados de rastreamento
       const trackingData = getTrackingDataForSubmission()
-      const identifiedSource = getIdentifiedSource()
 
       // Preparar dados para envio (remover formatação)
       const dataToSend = {
@@ -211,20 +210,11 @@ export default function InscricaoClientPage() {
         cpf: formData.cpf.replace(/\D/g, ""), // Remove formatação
         eventoId: 1, // ID do evento
         situacao: "registrado",
-        // Dados de rastreamento
-        origem: identifiedSource,
-        utm_source: trackingData.utm_source || null,
-        utm_medium: trackingData.utm_medium || null,
-        utm_campaign: trackingData.utm_campaign || null,
-        utm_term: trackingData.utm_term || null,
-        utm_content: trackingData.utm_content || null,
-        user_agent: trackingData.user_agent || null,
-        timestamp_acesso: trackingData.timestamp || new Date().toISOString(),
       }
 
       let utms = ""
-      if (dataToSend.utm_source) {
-        utms = `?utm_source=${dataToSend.utm_source}&utm_medium=${dataToSend.utm_medium}&utm_campaign=${dataToSend.utm_campaign}&utm_term=${dataToSend.utm_term}&utm_content=${dataToSend.utm_content}`
+      if (trackingData.utm_source) {
+        utms = `?utm_source=${trackingData.utm_source}&utm_medium=${trackingData.utm_medium}&utm_campaign=${trackingData.utm_campaign}&utm_term=${trackingData.utm_term}&utm_content=${trackingData.utm_content}`
       }
 
       // Log para debug (remover em produção)

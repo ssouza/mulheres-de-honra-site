@@ -59,12 +59,6 @@ export function useUTMTracking() {
     return data
   }
 
-  const getIdentifiedSource = () => {
-    const source = UTMTracker.identifySource(trackingData)
-    console.log("🎯 Origem identificada:", source)
-    return source
-  }
-
   // Função para debug - verificar localStorage
   const debugLocalStorage = () => {
     const stored = localStorage.getItem("mulheres_honra_tracking")
@@ -76,7 +70,6 @@ export function useUTMTracking() {
     trackingData,
     isLoaded,
     getTrackingDataForSubmission,
-    getIdentifiedSource,
     debugLocalStorage, // Para debug
   }
 }

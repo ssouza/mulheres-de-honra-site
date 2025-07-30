@@ -23,8 +23,7 @@ export default function UTMDebug() {
         urlParams: Object.fromEntries(urlParams.entries()),
         storedData: stored,
         currentData: current,
-        localStorage: localStorage.getItem("mulheres_honra_tracking"),
-        identifiedSource: stored ? UTMTracker.identifySource(stored) : "N/A",
+        localStorage: localStorage.getItem("mulheres_honra_tracking")
       })
     }
 
