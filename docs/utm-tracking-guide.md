@@ -8,17 +8,17 @@ O sistema captura automaticamente a origem dos visitantes e envia esses dados ju
 
 ### **1. Facebook Ads**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=video_palestrantes
+https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=video_palestrantes
 \`\`\`
 
 ### **2. Instagram Bio**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_oficial
+https://mulheresdehonra.com.br/?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_oficial
 \`\`\`
 
 ### **3. WhatsApp Direto**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campaign=contatos_eventos
+https://mulheresdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campaign=contatos_eventos
 \`\`\`
 
 ## 🔧 **Parâmetros UTM Suportados**
@@ -49,7 +49,7 @@ https://mulherdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campaig
   "utm_content": "video_palestrantes",
   "utm_id": "fb_001",
   "referrer": "https://facebook.com",
-  "landing_page": "https://mulherdehonra.com.br/?utm_source=facebook&utm_medium=cpc",
+  "landing_page": "https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc",
   "user_agent": "Mozilla/5.0...",
   "session_id": "session_1234567890_abc123",
   "timestamp_acesso": "2025-01-30T15:30:00.000Z"
@@ -60,32 +60,32 @@ https://mulherdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campaig
 
 ### **Facebook Ads - Vídeo das Palestrantes**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=video_palestrantes&utm_term=mulheres_honra
+https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=video_palestrantes&utm_term=mulheres_honra
 \`\`\`
 
 ### **Facebook Ads - Carrossel de Fotos**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=carrossel_fotos&utm_term=evento_gratuito
+https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=carrossel_fotos&utm_term=evento_gratuito
 \`\`\`
 
 ### **Instagram Bio**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_oficial
+https://mulheresdehonra.com.br/?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_oficial
 \`\`\`
 
 ### **Instagram Stories**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=instagram&utm_medium=stories&utm_campaign=stories_palestrantes&utm_content=swipe_up
+https://mulheresdehonra.com.br/?utm_source=instagram&utm_medium=stories&utm_campaign=stories_palestrantes&utm_content=swipe_up
 \`\`\`
 
 ### **WhatsApp - Lista de Contatos**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campaign=contatos_eventos&utm_content=lista_anterior
+https://mulheresdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campaign=contatos_eventos&utm_content=lista_anterior
 \`\`\`
 
 ### **WhatsApp - Grupos**
 \`\`\`
-https://mulherdehonra.com.br/?utm_source=whatsapp&utm_medium=group&utm_campaign=grupos_mulheres&utm_content=convite_grupo
+https://mulheresdehonra.com.br/?utm_source=whatsapp&utm_medium=group&utm_campaign=grupos_mulheres&utm_content=convite_grupo
 \`\`\`
 
 ## 📊 **Relatórios Disponíveis**
@@ -100,7 +100,7 @@ O sistema permite análise por:
 
 ## 🔍 **Como Testar**
 
-1. **Acesse com UTMs**: `https://mulherdehonra.com.br/?utm_source=teste&utm_medium=manual&utm_campaign=debug`
+1. **Acesse com UTMs**: `https://mulheresdehonra.com.br/?utm_source=teste&utm_medium=manual&utm_campaign=debug`
 2. **Abra o Console**: F12 → Console
 3. **Verifique os logs**: Dados de rastreamento aparecerão no console
 4. **Faça uma inscrição**: Os dados UTM serão enviados junto

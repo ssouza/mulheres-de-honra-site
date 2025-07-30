@@ -15,5 +15,5 @@ data:
   NEXT_PUBLIC_APP_NAME: "Mulheres de Honra"
   NEXT_PUBLIC_APP_VERSION: "1.0.0"
   NEXT_PUBLIC_BACKEND_API_URL: "http://eventmanager.ssouza.com.br/api/v1"
-  NEXT_PUBLIC_EVOLUTION_API_INSTANCE_URL: "https://evolutionapi.mulherdehonra.com.br"
+  NEXT_PUBLIC_EVOLUTION_API_INSTANCE_URL: "https://evolutionapi.mulheresdehonra.com.br"
   NEXT_PUBLIC_EVOLUTION_API_INSTANCE_NAME: "MulheresDeHonraAlphaville"

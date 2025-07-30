@@ -18,14 +18,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://mulherdehonra.com.br"),
+  metadataBase: new URL("https://mulheresdehonra.com.br"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Mulheres de Honra - Alphaville",
     description: "Evento Mulheres de Honra em Alphaville - 23 de Agosto de 2025. Inscreva-se gratuitamente!",
-    url: "https://mulherdehonra.com.br",
+    url: "https://mulheresdehonra.com.br",
     siteName: "Mulheres de Honra",
     images: [
       {
