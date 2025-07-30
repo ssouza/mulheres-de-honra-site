@@ -7,42 +7,22 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Mulheres de Honra - Alphaville",
-  description: "Evento Mulheres de Honra em Alphaville - 23 de Agosto de 2025. Inscreva-se gratuitamente!",
-  keywords: ["mulheres de honra", "evento", "alphaville", "2025", "gratuito"],
-  authors: [{ name: "Mulheres de Honra" }],
-  creator: "Mulheres de Honra",
-  publisher: "Mulheres de Honra",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL("https://mulheresdehonra.com.br"),
-  alternates: {
-    canonical: "/",
-  },
+  title: "Mulheres de Honra - Alphaville 2025.2",
+  description: "Existe uma identidade poderosa em Deus esperando para ser despertada em você — e o Mulheres de Honra é onde essa transformação acontece.",
   openGraph: {
-    title: "Mulheres de Honra - Alphaville",
-    description: "Evento Mulheres de Honra em Alphaville - 23 de Agosto de 2025. Inscreva-se gratuitamente!",
+    title: "Mulheres de Honra - Alphaville 2025.2",
+    description: "Existe uma identidade poderosa em Deus esperando para ser despertada em você — e o Mulheres de Honra é onde essa transformação acontece.",
     url: "https://mulheresdehonra.com.br",
-    siteName: "Mulheres de Honra",
+    siteName: "Mulheres de Honra - Alphaville 2025.2",
     images: [
       {
-        url: "/images/capa.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Mulheres de Honra - Evento em Alphaville",
+        url: "https://mulheresdehonra.com.br/images/capa.jpg",
+        width: 720,
+        height: 480,
       },
     ],
     locale: "pt_BR",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mulheres de Honra - Alphaville",
-    description: "Evento Mulheres de Honra em Alphaville - 23 de Agosto de 2025. Inscreva-se gratuitamente!",
-    images: ["/images/capa.jpg"],
   },
   robots: {
     index: true,
