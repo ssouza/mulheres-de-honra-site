@@ -3,14 +3,13 @@ import HeroSection from "@/components/sections/hero-section"
 import CountdownSection from "@/components/sections/countdown-section"
 import AboutSection from "@/components/sections/about-section"
 import SpeakersSection from "@/components/sections/speakers-section"
-import ScheduleSection from "@/components/sections/schedule-section"
 import TestimonialsSection from "@/components/sections/testimonials-section"
-import PhotosSection from "@/components/sections/photos-section"
 import SupportersSection from "@/components/sections/supporters-section"
 import VenueSection from "@/components/sections/venue-section"
 import FAQSection from "@/components/sections/faq-section"
 import CTASection from "@/components/sections/cta-section"
 import FooterSection from "@/components/sections/footer-section"
+import UTMDebug from "@/components/utm-debug"
 
 export default function Home() {
   const eventDate = "2025-08-23T15:00:00" // Data do evento
@@ -55,6 +54,9 @@ export default function Home() {
 
       {/* Footer */}
       <FooterSection />
+
+      {/* UTM Debug - só aparece em desenvolvimento */}
+      <UTMDebug />
     </div>
   )
 }

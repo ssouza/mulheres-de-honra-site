@@ -4,9 +4,12 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useUTMTracking } from "@/hooks/use-utm-tracking"
 
 export default function InscricaoClientPage() {
   const router = useRouter()
+  const { getTrackingDataForSubmission, getIdentifiedSource } = useUTMTracking()
+
   const [formData, setFormData] = useState({
     nomeCompleto: "",
     whatsapp: "",
@@ -197,13 +200,35 @@ export default function InscricaoClientPage() {
     setIsSubmitting(true)
 
     try {
+      // Captura dados de rastreamento
+      const trackingData = getTrackingDataForSubmission()
+      const identifiedSource = getIdentifiedSource()
+
       // Preparar dados para envio (remover formatação)
       const dataToSend = {
         nome: formData.nomeCompleto.trim(),
         telefone: formData.whatsapp.replace(/\D/g, ""), // Remove formatação
         cpf: formData.cpf.replace(/\D/g, ""), // Remove formatação
         eventoId: 1, // ID do evento
-        situacao: "registrado"
+        situacao: "registrado",
+        // Dados de rastreamento
+        origem: identifiedSource,
+        utm_source: trackingData.utm_source || null,
+        utm_medium: trackingData.utm_medium || null,
+        utm_campaign: trackingData.utm_campaign || null,
+        utm_term: trackingData.utm_term || null,
+        utm_content: trackingData.utm_content || null,
+        utm_id: trackingData.utm_id || null,
+        referrer: trackingData.referrer || null,
+        landing_page: trackingData.landing_page || null,
+        user_agent: trackingData.user_agent || null,
+        session_id: trackingData.session_id || null,
+        timestamp_acesso: trackingData.timestamp || new Date().toISOString(),
+      }
+
+      // Log para debug (remover em produção)
+      if (process.env.NODE_ENV === "development") {
+        console.log("Dados enviados para o backend:", dataToSend)
       }
 
       const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/inscricoes`, {
