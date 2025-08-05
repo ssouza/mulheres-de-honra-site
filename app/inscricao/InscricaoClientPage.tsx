@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useUTMTracking } from "@/hooks/use-utm-tracking"
@@ -22,6 +22,53 @@ export default function InscricaoClientPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isValidatingWhatsApp, setIsValidatingWhatsApp] = useState(false)
+  const [registrationCount, setRegistrationCount] = useState<number | null>(null)
+  const [isLoadingCount, setIsLoadingCount] = useState(true)
+  const [countError, setCountError] = useState<string | null>(null)
+
+  const MAX_REGISTRATIONS = 180
+
+  // Função para buscar o número atual de inscrições
+  const fetchRegistrationCount = async () => {
+    try {
+      setIsLoadingCount(true)
+      setCountError(null)
+
+      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/eventos/1/inscricoes/count`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.NEXT_PUBLIC_BACKEND_API_KEY || "",
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`Erro ao buscar contagem: ${response.status}`)
+      }
+
+      const data = await response.json()
+
+      // Assumindo que a API retorna { total: number } ou { count: number }
+      const count = data?.data?.total || 0
+      setRegistrationCount(count)
+    } catch (error) {
+      console.error("Erro ao buscar contagem de inscrições:", error)
+      setCountError("Erro ao verificar disponibilidade")
+      // Em caso de erro, assumimos que ainda há vagas disponíveis
+      setRegistrationCount(0)
+    } finally {
+      setIsLoadingCount(false)
+    }
+  }
+
+  // Buscar contagem ao carregar o componente
+  useEffect(() => {
+    fetchRegistrationCount()
+  }, [])
+
+  // Verificar se as vagas estão esgotadas
+  const isRegistrationFull = registrationCount !== null && registrationCount >= MAX_REGISTRATIONS
+  const remainingSpots = registrationCount !== null ? Math.max(0, MAX_REGISTRATIONS - registrationCount) : null
 
   // Função para formatar o número de WhatsApp
   const formatWhatsApp = (value: string) => {
@@ -306,6 +353,15 @@ export default function InscricaoClientPage() {
             2025.
           </p>
 
+          {/* Status das vagas */}
+          {isRegistrationFull ? (
+            <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+              <p className="text-red-700 text-sm font-medium">
+                <strong>Vagas Esgotadas!</strong>
+              </p>
+            </div>
+          ) : null}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="nomeCompleto" className="block text-gray-700 font-medium mb-2">
@@ -317,7 +373,7 @@ export default function InscricaoClientPage() {
                 name="nomeCompleto"
                 value={formData.nomeCompleto}
                 onChange={handleChange}
-                disabled={isSubmitting || isValidatingWhatsApp}
+                disabled={isSubmitting || isValidatingWhatsApp || isRegistrationFull}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-burgundy disabled:opacity-50 disabled:cursor-not-allowed ${
                   errors.nomeCompleto ? "border-red-500" : "border-gray-300"
                 }`}
@@ -336,7 +392,7 @@ export default function InscricaoClientPage() {
                 name="whatsapp"
                 value={formData.whatsapp}
                 onChange={handleChange}
-                disabled={isSubmitting || isValidatingWhatsApp}
+                disabled={isSubmitting || isValidatingWhatsApp || isRegistrationFull}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-burgundy disabled:opacity-50 disabled:cursor-not-allowed ${
                   errors.whatsapp ? "border-red-500" : "border-gray-300"
                 }`}
@@ -356,7 +412,7 @@ export default function InscricaoClientPage() {
                 name="cpf"
                 value={formData.cpf}
                 onChange={handleChange}
-                disabled={isSubmitting || isValidatingWhatsApp}
+                disabled={isSubmitting || isValidatingWhatsApp || isRegistrationFull}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-burgundy disabled:opacity-50 disabled:cursor-not-allowed ${
                   errors.cpf ? "border-red-500" : "border-gray-300"
                 }`}
@@ -376,14 +432,20 @@ export default function InscricaoClientPage() {
             <div className="pt-4">
               <button
                 type="submit"
-                disabled={isSubmitting || isValidatingWhatsApp}
-                className="w-full bg-burgundy text-white py-3 px-6 rounded-md font-bold hover:bg-burgundy-dark transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isSubmitting || isValidatingWhatsApp || isRegistrationFull}
+                className={`w-full py-3 px-6 rounded-md font-bold transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                  isRegistrationFull
+                    ? "bg-gray-400 text-white cursor-not-allowed"
+                    : "bg-burgundy text-white hover:bg-burgundy-dark"
+                }`}
               >
-                {isSubmitting
-                  ? "Processando..."
-                  : isValidatingWhatsApp
-                    ? "Validando WhatsApp..."
-                    : "Confirmar Inscrição"}
+                {isRegistrationFull
+                  ? "Vagas Esgotadas"
+                  : isSubmitting
+                    ? "Processando..."
+                    : isValidatingWhatsApp
+                      ? "Validando WhatsApp..."
+                      : "Confirmar Inscrição"}
               </button>
             </div>
           </form>
