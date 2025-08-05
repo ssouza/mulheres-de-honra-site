@@ -360,6 +360,12 @@ export default function InscricaoClientPage() {
                 <strong>Vagas Esgotadas!</strong>
               </p>
             </div>
+          ) : remainingSpots !== null && remainingSpots <= 20 ? (
+            <div className="bg-orange-50 border border-orange-200 rounded-md p-4 mb-6">
+              <p className="text-orange-700 text-sm">
+                <strong>Últimas vagas!</strong> Inscreva-se que ainda dá tempo.
+              </p>
+            </div>
           ) : null}
 
           <form onSubmit={handleSubmit} className="space-y-6">
