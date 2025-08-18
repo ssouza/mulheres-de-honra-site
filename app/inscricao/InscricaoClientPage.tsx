@@ -34,23 +34,23 @@ export default function InscricaoClientPage() {
       setIsLoadingCount(true)
       setCountError(null)
 
-      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/eventos/1/inscricoes/count`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": process.env.NEXT_PUBLIC_BACKEND_API_KEY || "",
-        },
-      })
+      //const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/eventos/1/inscricoes/count`, {
+      //  method: "GET",
+      //  headers: {
+      //    "Content-Type": "application/json",
+      //    "x-api-key": process.env.NEXT_PUBLIC_BACKEND_API_KEY || "",
+      //  },
+      //})
 
-      if (!response.ok) {
-        throw new Error(`Erro ao buscar contagem: ${response.status}`)
-      }
+      //if (!response.ok) {
+      //  throw new Error(`Erro ao buscar contagem: ${response.status}`)
+      //}
 
-      const data = await response.json()
+      //const data = await response.json()
 
       // Assumindo que a API retorna { total: number } ou { count: number }
-      const count = data?.data?.total || 0
-      setRegistrationCount(count)
+      //const count = data?.data?.total || 0
+      setRegistrationCount(MAX_REGISTRATIONS)
     } catch (error) {
       console.error("Erro ao buscar contagem de inscrições:", error)
       setCountError("Erro ao verificar disponibilidade")
@@ -238,7 +238,7 @@ export default function InscricaoClientPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+    return
     const isFormValid = await validateForm()
     if (!isFormValid) {
       return
