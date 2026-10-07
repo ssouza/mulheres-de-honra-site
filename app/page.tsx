@@ -12,7 +12,7 @@ import FooterSection from "@/components/sections/footer-section"
 import UTMDebug from "@/components/utm-debug"
 
 export default function Home() {
-  const eventDate = "2025-08-23T15:00:00" // Data do evento
+  const eventDate = "2026-11-14T15:00:00" // Data do evento
 
   return (
     <div className="min-h-screen">

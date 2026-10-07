@@ -349,8 +349,8 @@ export default function InscricaoClientPage() {
           </h1>
 
           <p className="text-gray-600 mb-8 text-center">
-            Preencha o formulário abaixo para garantir sua participação no evento Mulheres de Honra, em 23 de Agosto de
-            2025.
+Preencha o formulário abaixo para garantir sua participação no evento Mulheres de Honra, em 14 de Novembro de
+  2026.
           </p>
 
           {/* Status das vagas */}
@@ -467,7 +467,7 @@ export default function InscricaoClientPage() {
       {/* Footer */}
       <footer className="bg-white py-6 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600">© 2025 Mulheres de Honra. Todos os direitos reservados.</p>
+          <p className="text-gray-600">© 2026 Mulheres de Honra. Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>
