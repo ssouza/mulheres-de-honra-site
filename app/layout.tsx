@@ -7,13 +7,13 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Mulheres de Honra - Alphaville 2025.2",
+  title: "Mulheres de Honra - Alphaville 2026",
   description: "Existe uma identidade poderosa em Deus esperando para ser despertada em você — e o Mulheres de Honra é onde essa transformação acontece.",
   openGraph: {
-    title: "Mulheres de Honra - Alphaville 2025.2",
+    title: "Mulheres de Honra - Alphaville 2026",
     description: "Existe uma identidade poderosa em Deus esperando para ser despertada em você — e o Mulheres de Honra é onde essa transformação acontece.",
     url: "https://mulheresdehonra.com.br",
-    siteName: "Mulheres de Honra - Alphaville 2025.2",
+    siteName: "Mulheres de Honra - Alphaville 2026",
     images: [
       {
         url: "https://mulheresdehonra.com.br/images/capa.jpg",

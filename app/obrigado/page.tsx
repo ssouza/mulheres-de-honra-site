@@ -64,7 +64,7 @@ export default function ObrigadoPage() {
       {/* Footer */}
       <footer className="bg-white py-6 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600">© 2025 Mulheres de Honra. Todos os direitos reservados.</p>
+          <p className="text-gray-600">© 2026 Mulheres de Honra. Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>
