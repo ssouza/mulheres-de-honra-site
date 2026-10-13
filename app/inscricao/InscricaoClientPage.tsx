@@ -34,7 +34,7 @@ export default function InscricaoClientPage() {
       setIsLoadingCount(true)
       setCountError(null)
 
-      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/eventos/1/inscricoes/count`, {
+      const response = await fetch(`https://eventmanager.ssouza.com.br/api/v1/eventos/67/inscricoes/count`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
