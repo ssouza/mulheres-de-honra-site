@@ -26,7 +26,7 @@ export default function InscricaoClientPage() {
   const [isLoadingCount, setIsLoadingCount] = useState(true)
   const [countError, setCountError] = useState<string | null>(null)
 
-  const MAX_REGISTRATIONS = 180
+  const MAX_REGISTRATIONS = 100
 
   // Função para buscar o número atual de inscrições
   const fetchRegistrationCount = async () => {
@@ -255,7 +255,7 @@ export default function InscricaoClientPage() {
         nome: formData.nomeCompleto.trim(),
         telefone: formData.whatsapp.replace(/\D/g, ""), // Remove formatação
         cpf: formData.cpf.replace(/\D/g, ""), // Remove formatação
-        eventoId: 1, // ID do evento
+        eventoId: 67, // ID do evento
         situacao: "registrado",
       }
 
