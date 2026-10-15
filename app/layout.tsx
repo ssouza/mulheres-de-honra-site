@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "Mulheres de Honra - É tempo de Florescer",
     images: [
       {
-        url: "https://mulheresdehonra.com.br/images/capa.jpg",
+        url: "https://mulheresdehonra.com.br/images/capa.png",
         width: 720,
         height: 480,
       },
