@@ -8,7 +8,7 @@ O sistema captura automaticamente a origem dos visitantes e envia esses dados ju
 
 ### **1. Facebook Ads**
 \`\`\`
-https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2026&utm_content=video_palestrantes
+https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=video_palestrantes
 \`\`\`
 
 ### **2. Instagram Bio**
@@ -27,7 +27,7 @@ https://mulheresdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campa
 |-----------|-----------|---------|
 | `utm_source` | Origem do tráfego | facebook, instagram, whatsapp |
 | `utm_medium` | Meio/canal | cpc, bio, message, organic |
-| `utm_campaign` | Nome da campanha | evento_2026, perfil_oficial |
+| `utm_campaign` | Nome da campanha | evento_2025, perfil_oficial |
 | `utm_term` | Palavra-chave (opcional) | mulheres_honra, evento_gratuito |
 | `utm_content` | Conteúdo específico | video_palestrantes, post_stories |
 | `utm_id` | ID da campanha (opcional) | fb_001, ig_bio_001 |
@@ -44,7 +44,7 @@ https://mulheresdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campa
   "origem": "Facebook Ads",
   "utm_source": "facebook",
   "utm_medium": "cpc",
-  "utm_campaign": "evento_2026",
+  "utm_campaign": "evento_2025",
   "utm_term": "mulheres_honra",
   "utm_content": "video_palestrantes",
   "utm_id": "fb_001",
@@ -60,12 +60,12 @@ https://mulheresdehonra.com.br/?utm_source=whatsapp&utm_medium=message&utm_campa
 
 ### **Facebook Ads - Vídeo das Palestrantes**
 \`\`\`
-https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2026&utm_content=video_palestrantes&utm_term=mulheres_honra
+https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=video_palestrantes&utm_term=mulheres_honra
 \`\`\`
 
 ### **Facebook Ads - Carrossel de Fotos**
 \`\`\`
-https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2026&utm_content=carrossel_fotos&utm_term=evento_gratuito
+https://mulheresdehonra.com.br/?utm_source=facebook&utm_medium=cpc&utm_campaign=evento_2025&utm_content=carrossel_fotos&utm_term=evento_gratuito
 \`\`\`
 
 ### **Instagram Bio**

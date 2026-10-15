@@ -349,8 +349,8 @@ export default function InscricaoClientPage() {
           </h1>
 
           <p className="text-gray-600 mb-8 text-center">
-Preencha o formulário abaixo para garantir sua participação no evento Mulheres de Honra, em 14 de Novembro de
-  2026.
+            Preencha o formulário abaixo para garantir sua participação no evento Mulheres de Honra, em 14 de Novembro
+            de 2026, às 15h.
           </p>
 
           {/* Status das vagas */}

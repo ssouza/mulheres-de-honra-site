@@ -99,10 +99,10 @@ export default function AboutSection() {
               {/* Container com altura fixa para mobile */}
               <div className="relative h-80 sm:h-96 lg:h-[480px] w-full rounded-lg overflow-hidden shadow-xl bg-burgundy/5">
                 <Image
-                  src="/images/IMG_5290.jpg"
-                  alt="Organizadoras do Mulheres de Honra"
+                  src="/images/organizadoras-lady-marcia.jpg"
+                  alt="Lady Daiane e Marcia Saccomani, organizadoras do Mulheres de Honra"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-top"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
                   priority
                   onLoad={() => console.log("Imagem carregada com sucesso")}
