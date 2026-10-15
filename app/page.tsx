@@ -9,8 +9,6 @@ import VenueSection from "@/components/sections/venue-section"
 import FAQSection from "@/components/sections/faq-section"
 import CTASection from "@/components/sections/cta-section"
 import FooterSection from "@/components/sections/footer-section"
-import UTMDebug from "@/components/utm-debug"
-
 export default function Home() {
   const eventDate = "2026-11-14T15:00:00" // Data do evento
 
@@ -55,8 +53,6 @@ export default function Home() {
       {/* Footer */}
       <FooterSection />
 
-      {/* UTM Debug - só aparece em desenvolvimento */}
-      <UTMDebug />
     </div>
   )
 }
