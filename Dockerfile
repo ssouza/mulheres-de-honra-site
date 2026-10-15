@@ -10,7 +10,7 @@ WORKDIR /app
 RUN npm install -g pnpm@latest
 
 # Install dependencies based on the preferred package manager
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
