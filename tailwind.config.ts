@@ -12,12 +12,12 @@ const config: Config = {
     extend: {
       colors: {
         burgundy: {
-          DEFAULT: "#8B2131",
-          dark: "#6A1A26",
+          DEFAULT: "#8C6A3C",
+          dark: "#5C4527",
         },
         cream: {
-          DEFAULT: "#F5EFE6",
-          dark: "#E8DFD3",
+          DEFAULT: "#F4EDE2",
+          dark: "#E6D8C3",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

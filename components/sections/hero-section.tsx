@@ -17,7 +17,7 @@ export default function HeroSection() {
       <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white font-serif mb-4">Mulheres de Honra</h1>
         <p className="text-xl md:text-3xl text-cream mb-8">
-          Você não foi chamada pra viver no raso
+          É tempo de Florescer
         </p>
         <div className="flex flex-col md:flex-row gap-4">
           <Link href="/inscricao">

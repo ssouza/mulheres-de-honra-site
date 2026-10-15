@@ -10,7 +10,7 @@ import FAQSection from "@/components/sections/faq-section"
 import CTASection from "@/components/sections/cta-section"
 import FooterSection from "@/components/sections/footer-section"
 export default function Home() {
-  const eventDate = "2026-11-14T15:00:00" // Data do evento
+  const eventDate = "2026-11-14T15:00:00-03:00" // Data do evento
 
   return (
     <div className="min-h-screen">
