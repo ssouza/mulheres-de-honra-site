@@ -3,6 +3,8 @@ import HeroSection from "@/components/sections/hero-section"
 import CountdownSection from "@/components/sections/countdown-section"
 import AboutSection from "@/components/sections/about-section"
 import SpeakersSection from "@/components/sections/speakers-section"
+import OurPriseSection from "@/components/sections/our-prise-section"
+import SpecialAppearanceSection from "@/components/sections/special-appearance-section"
 import TestimonialsSection from "@/components/sections/testimonials-section"
 import SupportersSection from "@/components/sections/supporters-section"
 import VenueSection from "@/components/sections/venue-section"
@@ -28,6 +30,12 @@ export default function Home() {
 
       {/* Speakers Section */}
       <SpeakersSection />
+
+      {/* Our Prise Section */}
+      <OurPriseSection />
+
+      {/* Special Appearance Section */}
+      <SpecialAppearanceSection />
 
       {/* Schedule Section 
       <ScheduleSection />*/}
