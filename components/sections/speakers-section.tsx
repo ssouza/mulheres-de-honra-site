@@ -58,46 +58,6 @@ export default function SpeakersSection() {
               </div>
             </div>
           </div>
-
-        </div>
-
-        <div className="text-center mt-16 mb-10">
-          <h3 className="text-2xl md:text-3xl font-bold text-burgundy mb-4 font-serif">Louvor</h3>
-          <p className="text-gray-700 mx-auto">Quem vai conduzir os momentos de adoração do evento.</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {[
-            {
-              name: "Pastora Fernanda",
-              image: "/images/louvor-pastora-fernanda.jpg",
-              position: "object-[70%_25%]",
-            },
-            {
-              name: "Thayna Antunes",
-              image: "/images/louvor-thayna-antunes.jpg",
-              position: "object-[50%_20%]",
-            },
-          ].map((minister) => (
-            <div
-              key={minister.name}
-              className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105"
-            >
-              <div className="relative aspect-square">
-                <Image
-                  src={minister.image || "/placeholder.svg"}
-                  alt={minister.name}
-                  fill
-                  sizes="(min-width: 640px) 384px, 100vw"
-                  className={`object-cover ${minister.position}`}
-                />
-              </div>
-              <div className="px-6 py-3">
-                <h4 className="text-xl font-bold text-burgundy mb-2">{minister.name}</h4>
-                <p className="text-burgundy-dark mb-2">Louvor</p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

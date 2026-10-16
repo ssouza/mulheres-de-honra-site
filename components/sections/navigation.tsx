@@ -15,6 +15,12 @@ export default function Navigation() {
             <Link href="#palestrantes" className="text-burgundy hover:text-burgundy-dark font-medium">
               Palestrantes
             </Link>
+            <Link href="#louvor" className="text-burgundy hover:text-burgundy-dark font-medium">
+              Louvor
+            </Link>
+            <Link href="#participacao-especial" className="text-burgundy hover:text-burgundy-dark font-medium">
+              Participações Especiais
+            </Link>
            {/* <Link href="#programacao" className="text-burgundy hover:text-burgundy-dark font-medium">
               Programação
             </Link>*/}
