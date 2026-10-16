@@ -1,9 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Users } from "lucide-react"
 
 export default function AboutSection() {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   return (
     <section id="sobre" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -105,9 +108,10 @@ export default function AboutSection() {
                   className="object-cover object-top"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
                   priority
-                  onLoad={() => console.log("Imagem carregada com sucesso")}
+                  onLoad={() => setImageLoaded(true)}
                   onError={(e) => {
                     console.error("Erro ao carregar imagem:", e)
+                    setImageLoaded(true)
                     // Fallback para placeholder
                     const target = e.target as HTMLImageElement
                     target.src = "/placeholder.svg?height=400&width=300&text=Mulheres+de+Honra"
@@ -115,9 +119,11 @@ export default function AboutSection() {
                 />
 
                 {/* Loading indicator */}
-                <div className="absolute inset-0 bg-burgundy/5 animate-pulse flex items-center justify-center">
-                  <div className="text-burgundy/50 text-sm font-serif">Carregando...</div>
-                </div>
+                {!imageLoaded && (
+                  <div className="absolute inset-0 bg-burgundy/5 animate-pulse flex items-center justify-center">
+                    <div className="text-burgundy/50 text-sm font-serif">Carregando...</div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
